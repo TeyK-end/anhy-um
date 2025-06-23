@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOVE</title>
+
+    <style>
+      body {
+        background-image: url("love.gif");
+        background-repeat: no-repeat;
+        background-size: cover; /* Phủ kín viewport */
+        background-position: center; /* Căn giữa */
+        min-height: 100vh; /* Chiều cao tối thiểu bằng 100% viewport height */
+      }
+      #test {
+        position: absolute;
+        top: 421px;
+        left: 773px;
+        width: 100px;
+        height: 50px;
+        background-color: pink;
+        transition: transform 0.3s ease;
+      }
+      #test2 {
+        position: absolute;
+        top: 421px;
+        left: 619px;
+        width: 100px;
+        height: 50px;
+        background-color: pink;
+      }
+      h1 {
+        display: flex;
+        justify-content: center; /* Căn giữa theo chiều ngang */
+        align-items: center; /* Căn giữa theo chiều dọc */
+        height: 100vh; /* Đảm bảo chiều cao đủ để căn dọc */
+        margin: 0; /* Loại bỏ margin mặc định */
+        text-align: center; /* Căn giữa văn bản bên trong (tùy chọn) */
+        color: rgb(0, 0, 0);
+        animation: changecolor 5s linear 0.3s infinite;
+      }
+      
+      #text2 {
+        display: none;
+      }
+      @keyframes changecolor {
+        0% {
+          color: rgb(0, 0, 0);
+        }
+        10% {
+          color: rgb(1, 40, 238);
+        }
+        20% {
+          color: rgb(238, 1, 234);
+        }
+        40% {
+          color: rgb(179, 1, 238);
+        }
+        60% {
+          color: rgb(44, 238, 1);
+        }
+        80% {
+          color: darkred;
+        }
+        100% {
+          color: rgb(0, 0, 0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <audio id="bgm" src="audio/y2mate.com - 岑寧兒 追光者 歌詞.mp3" autoplay muted loop></audio>
+      
+      <div id="text1">
+        <h1>EM CÓ YÊU ANH KHÔNG ?</h1>
+        <button id="test" onclick="Noclick() ">Không</button>
+        <button id="test2" onclick="Yesclick()">Có</button>
+      </div>
+      <div id="text2">
+        <img
+          src="yeuem.gif"
+          width="300px"
+          height="300px"
+          style="position: absolute; top: 16px; left: 600px"
+        />
+        <h1>Anh biết mà anh cũng yêu em nhiều!!! <br>
+            ta có thể mãi mãi bên nhau được hông😢
+        </h1>
+
+      </div>
+    </header>
+
+    <script>
+      function Noclick() {
+        const button = document.getElementById("test");
+        let ran = Math.floor(Math.random() * 100) * 2; // Tạo số ngẫu nhiên từ 0 đến 200
+
+        const maxPos = 500;
+        const newTop = Math.min(ran, maxPos);
+        const newLeft = Math.min(ran, maxPos);
+
+        requestAnimationFrame(() => {
+          button.style.transform = `translate(${newLeft}px, ${newTop}px)`;
+        });
+      }
+      function Yesclick() {
+        const text1 = document.getElementById("text1");
+        const text2 = document.getElementById("text2");
+
+        // Hiển thị thông điệp yêu thương
+        if (text1) {
+          text1.style.display = "none";
+          text2.style.display = "block";
+        }
+
+        // Phát nhạc có tiếng
+      }
+     window.addEventListener("load", () => {
+  const audio = document.getElementById("bgm");
+  audio.play(); // sẽ được phép vì muted
+});
+      // Bật tiếng khi user click bất kỳ đâu
+      document.addEventListener("click", () => {
+        const audio = document.getElementById("bgm");
+        if (audio.muted) {
+          audio.muted = false;
+          audio.play();
+        }
+      });
+    </script>
+  </body>
+</html>
